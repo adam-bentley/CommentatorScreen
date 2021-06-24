@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using CommentatorScreen.Models.DB;
+using System.Collections.Generic;
 
 namespace CommentatorScreen
 {

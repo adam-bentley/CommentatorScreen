@@ -1,17 +1,14 @@
-﻿#nullable disable
+﻿using System;
+using System.Collections.Generic;
 
-namespace CommentatorScreen
+#nullable disable
+
+namespace CommentatorScreen.Models.DB
 {
     public partial class AceClass
     {
-        /// <summary>
-        /// The prefix of the racenumber for that class
-        /// </summary>
         public string Letter { get; set; }
-
-        /// <summary>
-        /// Description of that class
-        /// </summary>
         public string Description { get; set; }
+        public int? Size { get; set; }
     }
 }

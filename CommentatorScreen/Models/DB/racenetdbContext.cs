@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 #nullable disable
 
-namespace CommentatorScreen
+namespace CommentatorScreen.Models.DB
 {
     public partial class racenetdbContext : DbContext
     {
@@ -16,8 +18,11 @@ namespace CommentatorScreen
         }
 
         public virtual DbSet<AceClass> AceClasses { get; set; }
+        
         public virtual DbSet<CnnCurrentpair> CnnCurrentpairs { get; set; }
+        
         public virtual DbSet<RnCateg> RnCategs { get; set; }
+
         public virtual DbSet<RnClass> RnClasses { get; set; }
         public virtual DbSet<RnConfig> RnConfigs { get; set; }
         public virtual DbSet<RnCountrycode> RnCountrycodes { get; set; }
@@ -36,14 +41,8 @@ namespace CommentatorScreen
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning
-                /*
-                 * To protect potentially sensitive information in your connection string, you should move it out of source code.
-                 * You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration -
-                 * see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings,
-                 * see http://go.microsoft.com/fwlink/?LinkId=723263. */
-                optionsBuilder.UseNpgsql("Server=127.0.0.1;Port=5432;Database=racenetdb_test;UserId=postgres;Password=dragway42");
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("Server=tsimain;Database=racenetdb;userid=postgres;password=Dragway42");
             }
         }
 
@@ -64,13 +63,20 @@ namespace CommentatorScreen
                     .IsFixedLength(true);
 
                 entity.Property(e => e.Description).HasColumnName("description");
+
+                entity.Property(e => e.Size).HasColumnName("size");
             });
+
 
             modelBuilder.Entity<CnnCurrentpair>(entity =>
             {
                 entity.HasNoKey();
 
                 entity.ToTable("cnn_currentpair");
+
+                entity.Property(e => e.Cellwarning).HasColumnName("cellwarning");
+
+                entity.Property(e => e.Datetime).HasColumnName("datetime");
 
                 entity.Property(e => e.Leftet1000)
                     .HasPrecision(6, 4)
@@ -188,6 +194,8 @@ namespace CommentatorScreen
                     .HasColumnType("character varying")
                     .HasColumnName("rightstaged");
 
+                entity.Property(e => e.Runactive).HasColumnName("runactive");
+
                 entity.Property(e => e.Towerready)
                     .HasColumnType("character varying")
                     .HasColumnName("towerready");
@@ -247,6 +255,8 @@ namespace CommentatorScreen
 
                 entity.Property(e => e.Tree).HasColumnName("tree");
             });
+
+           
 
             modelBuilder.Entity<RnClass>(entity =>
             {
@@ -668,7 +678,7 @@ namespace CommentatorScreen
                     .HasComment("1000' Trigger time");
 
                 entity.Property(e => e.Delay)
-                    .HasPrecision(4, 3)
+                    .HasPrecision(5, 3)
                     .HasColumnName("delay")
                     .HasComment("1st Amber Delay");
 
@@ -957,8 +967,7 @@ namespace CommentatorScreen
 
             modelBuilder.Entity<RnTrackinfo>(entity =>
             {
-                entity.HasKey(e => e.Eventname)
-                    .HasName("rn_trackinfo_pkey");
+                entity.HasNoKey();
 
                 entity.ToTable("rn_trackinfo");
 

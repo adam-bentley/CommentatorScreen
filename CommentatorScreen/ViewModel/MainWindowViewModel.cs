@@ -1,7 +1,9 @@
-﻿using Npgsql;
+﻿using CommentatorScreen.Models.DB;
+using Npgsql;
 using System;
 using System.ComponentModel;
 using System.Threading;
+using System.Windows;
 
 namespace CommentatorScreen
 {
@@ -98,7 +100,7 @@ namespace CommentatorScreen
         public void ListenForUpdates()
         {
             // Open a connection to the DB
-             using var conn = new NpgsqlConnection("Server=127.0.0.1;Port=5432;Database=racenetdb_test;UserId=postgres;Password=dragway42");
+             using var conn = new NpgsqlConnection("Server=tsimain;Port=5432;Database=racenetdb;UserId=postgres;Password=dragway42");
             conn.Open();
 
             // For each runlogClient notification
@@ -140,8 +142,9 @@ namespace CommentatorScreen
                     QualifyingViewModel = new QualifyingViewModel(CurrentCategory);
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show(e.Message);
                 throw;
             }
         }

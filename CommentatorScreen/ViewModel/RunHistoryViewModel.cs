@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using CommentatorScreen.Models.DB;
+using System.Collections.ObjectModel;
 
 namespace CommentatorScreen
 {

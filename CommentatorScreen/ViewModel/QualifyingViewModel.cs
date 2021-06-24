@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommentatorScreen.Models.DB;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;

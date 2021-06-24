@@ -1,4 +1,5 @@
-﻿using Npgsql;
+﻿using CommentatorScreen.Models.DB;
+using Npgsql;
 using PropertyChanged;
 using System;
 using System.Collections.ObjectModel;
@@ -230,7 +231,7 @@ namespace CommentatorScreen
         {
             // Open a connection to the DB
             using var conn = new NpgsqlConnection
-                ("Server=127.0.0.1;Port=5432;Database=racenetdb_test;" +
+                ("Server=tsimain;Port=5432;Database=racenetdb;" +
                 "UserId=postgres;Password=dragway42");
             conn.Open();
 
